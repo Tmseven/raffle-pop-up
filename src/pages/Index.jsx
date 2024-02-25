@@ -33,12 +33,17 @@ const Index = () => {
       <Center py={10}>
         <VStack spacing={8}>
           <Heading color="brand.800">Raffle System</Heading>
-          <Box p={5} shadow="md" borderWidth="1px" borderRadius="md" animation={selectedName && fadeInUpAnimation}>
-            <Text fontSize="2xl" fontWeight="bold" mb={4}>
-              Current Selection
-            </Text>
-            <Text fontSize="xl">{selectedName || "No name selected yet"}</Text>
-          </Box>
+          <VStack spacing={8}>
+            <Box p={5} shadow="md" borderWidth="1px" borderRadius="md" bg="gray.200" minH="200px" display="flex" alignItems="center" justifyContent="center">
+              <Text fontSize="xl">Animation will be added here.</Text>
+            </Box>
+            <Box p={5} shadow="md" borderWidth="1px" borderRadius="md" animation={selectedName && fadeInUpAnimation}>
+              <Text fontSize="2xl" fontWeight="bold" mb={4}>
+                Current Selection
+              </Text>
+              <Text fontSize="xl">{selectedName || "No name selected yet"}</Text>
+            </Box>
+          </VStack>
           <Button leftIcon={<FaRedo />} colorScheme="purple" variant="solid" onClick={handleRaffleRoll}>
             Roll
           </Button>
