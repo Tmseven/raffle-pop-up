@@ -1,8 +1,16 @@
 import React, { useState } from "react";
-import { Box, Button, Text, VStack, Heading, Container, Center, useToast } from "@chakra-ui/react";
+import { Box, Button, Text, VStack, Heading, Container, Center, useToast, keyframes, useStyleConfig } from "@chakra-ui/react";
 import { FaRedo } from "react-icons/fa";
 
+const fadeInUpKeyframes = keyframes`
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+`;
+
+const fadeInUpAnimation = `${fadeInUpKeyframes} 1s ease-in-out`;
+
 const Index = () => {
+  const styles = useStyleConfig("GlobalStyles");
   const names = ["Alice", "Bob", "Charlie", "Diana", "Eve", "Frank", "Grace"];
   const [selectedName, setSelectedName] = useState("");
   const toast = useToast();
@@ -24,14 +32,14 @@ const Index = () => {
     <Container maxW="container.md">
       <Center py={10}>
         <VStack spacing={8}>
-          <Heading>Raffle System</Heading>
-          <Box p={5} shadow="md" borderWidth="1px" borderRadius="md">
+          <Heading color="brand.800">Raffle System</Heading>
+          <Box p={5} shadow="md" borderWidth="1px" borderRadius="md" animation={selectedName && fadeInUpAnimation}>
             <Text fontSize="2xl" fontWeight="bold" mb={4}>
               Current Selection
             </Text>
             <Text fontSize="xl">{selectedName || "No name selected yet"}</Text>
           </Box>
-          <Button leftIcon={<FaRedo />} colorScheme="teal" onClick={handleRaffleRoll}>
+          <Button leftIcon={<FaRedo />} colorScheme="purple" variant="solid" onClick={handleRaffleRoll}>
             Roll
           </Button>
         </VStack>
@@ -39,5 +47,14 @@ const Index = () => {
     </Container>
   );
 };
+
+<style>
+  {`
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  `}
+</style>;
 
 export default Index;
