@@ -13,12 +13,13 @@ const Index = () => {
   const styles = useStyleConfig("GlobalStyles");
   const names = ["Alice", "Bob", "Charlie", "Diana", "Eve", "Frank", "Grace"];
   const [selectedName, setSelectedName] = useState("");
-  const toast = useToast();
+  const [winnerCount, setWinnerCount] = useState(0);
 
   const handleRaffleRoll = () => {
     const randomIndex = Math.floor(Math.random() * names.length);
     const name = names[randomIndex];
     setSelectedName(name);
+    setWinnerCount((prevCount) => prevCount + 1);
     toast({
       title: "Raffle Roll",
       description: `Congratulations ${name}!`,
@@ -27,20 +28,22 @@ const Index = () => {
       isClosable: true,
     });
   };
+  const toast = useToast();
 
   return (
     <Container maxW="container.md">
       <Center py={10}>
         <VStack spacing={8}>
-          <Heading color="brand.800">Raffle System</Heading>
+          <Heading color="brand.800">Team Marc Grand Raffle Draw</Heading>
           <VStack spacing={8}>
             <Box p={5} shadow="md" borderWidth="1px" borderRadius="md" bg="gray.200" minH="200px" display="flex" alignItems="center" justifyContent="center">
-              <Text fontSize="xl">Animation will be added here.</Text>
+              <Box as="div" className="placeholder-animation" w="100%" h="200px" bgGradient="linear(to-l, #7928CA, #FF0080)" animation={`${fadeInUpAnimation}`} />
             </Box>
             <Box p={5} shadow="md" borderWidth="1px" borderRadius="md" animation={selectedName && fadeInUpAnimation}>
               <Text fontSize="2xl" fontWeight="bold" mb={4}>
-                Current Selection
+                Congratulations Winner #:
               </Text>
+              <Text fontSize="xl">{selectedName ? `Winner #${winnerCount}: ${selectedName}` : "Awaiting next winner..."}</Text>
               <Text fontSize="xl">{selectedName || "No name selected yet"}</Text>
             </Box>
           </VStack>
