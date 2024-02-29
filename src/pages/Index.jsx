@@ -75,7 +75,7 @@ const Index = () => {
               <Text fontSize="xl">{selectedName || "No name selected yet"}</Text>
             </Box>
           </VStack>
-          <Input type="file" accept=".csv" onChange={handleFileUpload} hidden={!uploadComplete} />
+          <Input type="file" accept=".csv" onChange={handleFileUpload} hidden={uploadComplete} />
           {uploadComplete && (
             <Button colorScheme="blue" onClick={handleRaffleRoll} leftIcon={<FaRedo />} mt="4">
               Roll Next Winner
@@ -87,13 +87,28 @@ const Index = () => {
   );
 };
 
-<style>
-  {`
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+<style jsx global>{`
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
     }
-  `}
-</style>;
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  body {
+    background-color: #f0e7db; /* light warm background */
+  }
+  #root {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* subtle gradient for excitement */
+    font-family: "Courier New", Courier, monospace; /* fun and exiting font style */
+  }
+`}</style>;
 
 export default Index;
