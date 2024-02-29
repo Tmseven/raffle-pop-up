@@ -11,7 +11,7 @@ const fadeInUpAnimation = `${fadeInUpKeyframes} 1s ease-in-out`;
 
 const Index = () => {
   const styles = useStyleConfig("GlobalStyles");
-  const names = ["Alice", "Bob", "Charlie", "Diana", "Eve", "Frank", "Grace"];
+  const names = []; // Add the provided names here.
   const [selectedName, setSelectedName] = useState("");
   const [winnerCount, setWinnerCount] = useState(0);
 
@@ -37,7 +37,7 @@ const Index = () => {
           <Heading color="brand.800">Team Marc Grand Raffle Draw</Heading>
           <VStack spacing={8}>
             <Box p={5} shadow="md" borderWidth="1px" borderRadius="md" bg="gray.200" minH="200px" display="flex" alignItems="center" justifyContent="center">
-              <Box as="div" className="placeholder-animation" w="100%" h="200px" bgGradient="linear(to-l, #7928CA, #FF0080)" animation={`${fadeInUpAnimation}`} />
+              <Box as="iframe" title="Raffle Animation" src="https://www.youtube.com/embed/LZ8t5BNv9tI?autoplay=1&loop=1&playlist=LZ8t5BNv9tI&controls=0&modestbranding=1" allow="autoplay; encrypted-media" w="100%" h="200px" />
             </Box>
             <Box p={5} shadow="md" borderWidth="1px" borderRadius="md" animation={selectedName && fadeInUpAnimation}>
               <Text fontSize="2xl" fontWeight="bold" mb={4}>
@@ -47,9 +47,7 @@ const Index = () => {
               <Text fontSize="xl">{selectedName || "No name selected yet"}</Text>
             </Box>
           </VStack>
-          <Button leftIcon={<FaRedo />} colorScheme="purple" variant="solid" onClick={handleRaffleRoll}>
-            Roll
-          </Button>
+          {/* The Roll button is now hidden as the winners will pop up automatically after the clip */}
         </VStack>
       </Center>
     </Container>
