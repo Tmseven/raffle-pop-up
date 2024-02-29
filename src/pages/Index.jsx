@@ -67,12 +67,16 @@ const Index = () => {
             <Box p={5} shadow="md" borderWidth="1px" borderRadius="md" bg="gray.200" minH="200px" display="flex" alignItems="center" justifyContent="center">
               <Box as="iframe" title="Raffle Animation" src="https://www.youtube.com/embed/LZ8t5BNv9tI?autoplay=1&loop=1&playlist=LZ8t5BNv9tI&controls=0&modestbranding=1" allow="autoplay; encrypted-media" w="100%" h="200px" />
             </Box>
-            <Box p={5} shadow="md" borderWidth="1px" borderRadius="md" animation={selectedName && fadeInUpAnimation}>
-              <Text fontSize="2xl" fontWeight="bold" mb={4}>
-                Congratulations Winner #:
-              </Text>
-              <Text fontSize="xl">{selectedName ? `Winner #${winnerCount}: ${selectedName}` : "Awaiting next winner..."}</Text>
-              <Text fontSize="xl">{selectedName || "No name selected yet"}</Text>
+            <Box p={5} shadow="md" borderWidth="1px" borderRadius="md" animation={selectedName && fadeInUpAnimation} bg="teal.800" color="white">
+              {selectedName && (
+                <VStack spacing={3}>
+                  <Text fontSize="2xl" fontWeight="bold">
+                    Winner #{winnerCount}: {selectedName}
+                  </Text>
+                  <Text fontSize="xl">Prize: Lovely Prize</Text>
+                </VStack>
+              )}
+              {!selectedName && <Text fontSize="xl">Awaiting next winner...</Text>}
             </Box>
           </VStack>
           <Input type="file" accept=".csv" onChange={handleFileUpload} hidden={uploadComplete} />
