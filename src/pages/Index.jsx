@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Box, Button, Text, VStack, Heading, Container, Center, useToast, keyframes, useStyleConfig } from "@chakra-ui/react";
+import React, { useState, useRef } from "react";
+import { Box, Button, Text, VStack, Heading, Container, Center, useToast, keyframes, useStyleConfig, Input } from "@chakra-ui/react";
+
 import { FaRedo } from "react-icons/fa";
 
 const fadeInUpKeyframes = keyframes`
@@ -11,13 +12,40 @@ const fadeInUpAnimation = `${fadeInUpKeyframes} 1s ease-in-out`;
 
 const Index = () => {
   const styles = useStyleConfig("GlobalStyles");
-  const names = []; // Add the provided names here.
+  const names = useRef([]); // This will hold the list of names from the uploaded CSV
+  const [uploadComplete, setUploadComplete] = useState(false);
   const [selectedName, setSelectedName] = useState("");
   const [winnerCount, setWinnerCount] = useState(0);
 
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const text = e.target.result;
+        const lines = text
+          .split("\n")
+          .map((line) => line.trim())
+          .filter((line) => line);
+        names.current = lines;
+        setUploadComplete(true);
+      };
+      reader.readAsText(file);
+    }
+  };
+
   const handleRaffleRoll = () => {
-    const randomIndex = Math.floor(Math.random() * names.length);
-    const name = names[randomIndex];
+    if (!names.current.length) {
+      toast({
+        title: "Raffle Roll",
+        description: "The list of names is empty. Please upload a CSV file.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
+    const name = names.current.shift();
     setSelectedName(name);
     setWinnerCount((prevCount) => prevCount + 1);
     toast({
@@ -47,7 +75,12 @@ const Index = () => {
               <Text fontSize="xl">{selectedName || "No name selected yet"}</Text>
             </Box>
           </VStack>
-          {/* The Roll button is now hidden as the winners will pop up automatically after the clip */}
+          <Input type="file" accept=".csv" onChange={handleFileUpload} hidden={!uploadComplete} />
+          {uploadComplete && (
+            <Button colorScheme="blue" onClick={handleRaffleRoll} leftIcon={<FaRedo />} mt="4">
+              Roll Next Winner
+            </Button>
+          )}
         </VStack>
       </Center>
     </Container>
