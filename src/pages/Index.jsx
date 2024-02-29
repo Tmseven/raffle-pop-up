@@ -27,7 +27,7 @@ const Index = () => {
           .split("\n")
           .map((line) => line.trim())
           .filter((line) => line);
-        names.current = lines;
+        names.current = lines.slice(1); // Skip the first row (assumed header)
         setUploadComplete(true);
       };
       reader.readAsText(file);
@@ -64,16 +64,21 @@ const Index = () => {
         <VStack spacing={8}>
           <Heading color="brand.800">Team Marc Grand Raffle Draw</Heading>
           <VStack spacing={8}>
-            <Box p={5} shadow="md" borderWidth="1px" borderRadius="md" bg="gray.200" minH="200px" display="flex" alignItems="center" justifyContent="center">
-              <Box as="iframe" title="Raffle Animation" src="https://www.youtube.com/embed/LZ8t5BNv9tI?autoplay=1&loop=1&playlist=LZ8t5BNv9tI&controls=0&modestbranding=1" allow="autoplay; encrypted-media" w="100%" h="200px" />
+            <Box p={5} shadow="md" borderRadius="md" bg="gray.200" minH="200px" display="flex" alignItems="center" justifyContent="center">
+              <Box as="iframe" title="Raffle Animation" src="https://u.pcloud.link/publink/show?code=XZVKtJ0ZWsH21t0nzd7EW4yhl3Iwiyb6pJjX" allowFullScreen allow="autoplay; encrypted-media" w="100%" h="200px" />
             </Box>
             <Box p={5} shadow="md" borderWidth="1px" borderRadius="md" animation={selectedName && fadeInUpAnimation} bg="teal.800" color="white">
               {selectedName && (
                 <VStack spacing={3}>
-                  <Text fontSize="2xl" fontWeight="bold">
-                    Winner #{winnerCount}: {selectedName}
-                  </Text>
-                  <Text fontSize="xl">Prize: Lovely Prize</Text>
+                  <VStack align="stretch" textAlign="center">
+                    <Text fontSize="2xl" fontWeight="bold">
+                      Winner No. {winnerCount}
+                    </Text>
+                    <Text fontSize="xl">Category: Player Prize</Text>
+                    <Text fontSize="xl">Prize: 1000PHPT</Text>
+                    <Text fontSize="xl">Username: {selectedName}</Text>
+                    <Text fontSize="xl">Congratulations!</Text>
+                  </VStack>
                 </VStack>
               )}
               {!selectedName && <Text fontSize="xl">Awaiting next winner...</Text>}
