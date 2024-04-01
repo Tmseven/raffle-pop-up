@@ -15,6 +15,7 @@ const Index = () => {
   const names = useRef([]); // This will hold the list of names from the uploaded CSV
   const [uploadComplete, setUploadComplete] = useState(false);
   const [selectedName, setSelectedName] = useState("");
+  const [selectedPrizeCategory, setSelectedPrizeCategory] = useState("");
   const [winnerCount, setWinnerCount] = useState(0);
 
   const handleFileUpload = (event) => {
@@ -27,7 +28,8 @@ const Index = () => {
           .split("\n")
           .map((line) => line.trim())
           .filter((line) => line);
-        names.current = lines.slice(1); // Skip the first row (assumed header)
+        const [header, ...data] = lines;
+        names.current = data.map((line) => line.split(",")[0]);
         setUploadComplete(true);
       };
       reader.readAsText(file);
@@ -45,8 +47,9 @@ const Index = () => {
       });
       return;
     }
-    const name = names.current.shift();
+    const [name, prizeCategory] = names.current.shift().split(",");
     setSelectedName(name);
+    setSelectedPrizeCategory(prizeCategory);
     setWinnerCount((prevCount) => prevCount + 1);
     toast({
       title: "Raffle Roll",
@@ -73,16 +76,13 @@ const Index = () => {
               {selectedName && (
                 <VStack spacing={3}>
                   <VStack align="stretch" textAlign="center">
-                    <Text fontSize="2xl" fontWeight="bold" color="yellow.400" textShadow="0 0 10px white">
+                    <Text fontSize="2xl" fontWeight="bold" color="white" textShadow="0 0 10px yellow">
                       Winner No. {winnerCount}
                     </Text>
-                    <Text fontSize="xl" color="yellow.400" textShadow="0 0 10px white">
-                      Category: Player Prize
+                    <Text fontSize="xl" color="white" textShadow="0 0 10px yellow">
+                      Category: {selectedPrizeCategory}
                     </Text>
-                    <Text fontSize="xl" color="yellow.400" textShadow="0 0 10px white">
-                      Prize: 1000PHPT
-                    </Text>
-                    <Text fontSize="xl" color="yellow.400" textShadow="0 0 10px white">
+                    <Text fontSize="xl" color="white" textShadow="0 0 10px yellow">
                       Username: {selectedName}
                     </Text>
                     <Text fontSize="xl" color="yellow.400" textShadow="0 0 10px white">
