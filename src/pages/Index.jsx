@@ -65,8 +65,8 @@ const Index = () => {
     <Container maxW="container.md">
       <Center py={10}>
         <VStack spacing={8}>
-          <Heading color="yellow.400" textShadow="0 0 10px white">
-            Team Marc Grand Raffle Draw
+          <Heading color="yellow.400" textShadow="2px 2px 4px rgba(0,0,0,0.5)">
+            GPT Engineer Grand Raffle Draw
           </Heading>
           <VStack spacing={8}>
             <Box p={5} shadow="md" bg="white" minH="200px" display="flex" alignItems="center" justifyContent="center">
