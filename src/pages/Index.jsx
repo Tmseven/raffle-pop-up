@@ -64,8 +64,8 @@ const Index = () => {
         <VStack spacing={8}>
           <Heading color="brand.800">Team Marc Grand Raffle Draw</Heading>
           <VStack spacing={8}>
-            <Box p={5} shadow="md" borderRadius="md" bg="gray.200" minH="200px" display="flex" alignItems="center" justifyContent="center">
-              <Box as="iframe" title="Raffle Animation" src="https://u.pcloud.link/publink/show?code=XZVKtJ0ZWsH21t0nzd7EW4yhl3Iwiyb6pJjX" allowFullScreen allow="autoplay; encrypted-media" w="100%" h="200px" />
+            <Box p={5} shadow="md" bg="white" minH="200px" display="flex" alignItems="center" justifyContent="center">
+              <Box as="img" src="https://marcroland84.files.wordpress.com/2024/03/video.gif" alt="Raffle Animation" w="100%" h="200px" objectFit="contain" />
             </Box>
             <Box p={5} shadow="md" borderWidth="1px" borderRadius="md" animation={selectedName && fadeInUpAnimation} bg="teal.800" color="white">
               {selectedName && (
