@@ -62,7 +62,9 @@ const Index = () => {
     <Container maxW="container.md">
       <Center py={10}>
         <VStack spacing={8}>
-          <Heading color="brand.800">Team Marc Grand Raffle Draw</Heading>
+          <Heading color="yellow.400" textShadow="0 0 10px white">
+            Team Marc Grand Raffle Draw
+          </Heading>
           <VStack spacing={8}>
             <Box p={5} shadow="md" bg="white" minH="200px" display="flex" alignItems="center" justifyContent="center">
               <Box as="img" src="https://marcroland84.files.wordpress.com/2024/03/video.gif" alt="Raffle Animation" w="100%" h="200px" objectFit="contain" />
@@ -71,13 +73,21 @@ const Index = () => {
               {selectedName && (
                 <VStack spacing={3}>
                   <VStack align="stretch" textAlign="center">
-                    <Text fontSize="2xl" fontWeight="bold">
+                    <Text fontSize="2xl" fontWeight="bold" color="yellow.400" textShadow="0 0 10px white">
                       Winner No. {winnerCount}
                     </Text>
-                    <Text fontSize="xl">Category: Player Prize</Text>
-                    <Text fontSize="xl">Prize: 1000PHPT</Text>
-                    <Text fontSize="xl">Username: {selectedName}</Text>
-                    <Text fontSize="xl">Congratulations!</Text>
+                    <Text fontSize="xl" color="yellow.400" textShadow="0 0 10px white">
+                      Category: Player Prize
+                    </Text>
+                    <Text fontSize="xl" color="yellow.400" textShadow="0 0 10px white">
+                      Prize: 1000PHPT
+                    </Text>
+                    <Text fontSize="xl" color="yellow.400" textShadow="0 0 10px white">
+                      Username: {selectedName}
+                    </Text>
+                    <Text fontSize="xl" color="yellow.400" textShadow="0 0 10px white">
+                      Congratulations!
+                    </Text>
                   </VStack>
                 </VStack>
               )}
@@ -108,7 +118,7 @@ const Index = () => {
     }
   }
   body {
-    background-color: #f0e7db; /* light warm background */
+    background-color: #000;
   }
   #root {
     min-height: 100vh;
